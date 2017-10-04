@@ -6,7 +6,7 @@ from domain.cache import io_cache_with_ttl
 class WordUrl:
 
     @classmethod
-    @io_cache_with_ttl(seconds=60*60*24)
+    @io_cache_with_ttl(seconds=60 * 60 * 24)
     def raw(cls):
         response = requests.get(cls.URL)
         if response.status_code == requests.codes.ok:

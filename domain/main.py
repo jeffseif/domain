@@ -1,11 +1,8 @@
-#! /usr/local/bin/python3
 from functools import partial
-import itertools
 
 from colors import BLUE
 from colors import GREEN
 from colors import RED
-from colors import WHITE
 
 from domain.word_url import English
 from domain.word_url import TLD
@@ -14,11 +11,11 @@ from domain.word_url import TLD
 DOT = RED('.')
 
 
-longer_than = lambda length: partial(filter, lambda s: len(s) > length)
-shorter_than = lambda length: partial(filter, lambda s: len(s) < length)
-starts_with = lambda start: partial(filter, lambda s: s.startswith(start))
-ends_with = lambda end: partial(filter, lambda s: s.endswith(end) and s != end)
-contains = lambda sub: partial(filter, lambda s: sub in s)
+longer_than = lambda length: partial(filter, lambda s: len(s) > length) # noqa
+shorter_than = lambda length: partial(filter, lambda s: len(s) < length) # noqa
+starts_with = lambda start: partial(filter, lambda s: s.startswith(start)) # noqa
+ends_with = lambda end: partial(filter, lambda s: s.endswith(end) and s != end) # noqa
+contains = lambda sub: partial(filter, lambda s: sub in s) # noqa
 
 
 def apply(modifier):
@@ -59,8 +56,8 @@ def end(tlds, words):
     words = list(words)
     for tld in tlds:
         for word in words:
-            if word.endswith(tld): # and tld != word:
-                yield word[ : -len(tld)] + DOT + GREEN(tld)
+            if word.endswith(tld):  # and tld != word:
+                yield word[: -len(tld)] + DOT + GREEN(tld)
 
 
 @apply(sorted)
@@ -69,7 +66,7 @@ def double(tlds, words):
     for tld in tlds:
         for word in words:
             if word.endswith(tld):
-                stub = word[ : -len(tld)]
+                stub = word[: -len(tld)]
                 if stub in words:
                     yield stub + DOT + GREEN(tld)
 
