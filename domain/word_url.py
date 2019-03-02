@@ -1,12 +1,12 @@
 import requests
 
-from domain.cache import io_cache_with_ttl
+from cachet import sqlite_cache
 
 
 class WordUrl:
 
     @classmethod
-    @io_cache_with_ttl(seconds=60 * 60 * 24)
+    @sqlite_cache()
     def raw(cls):
         response = requests.get(cls.URL)
         if response.status_code == requests.codes.ok:

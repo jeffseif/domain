@@ -1,3 +1,4 @@
+-e git://github.com/jeffseif/cachet.git#egg=cachet
 -e git://github.com/jeffseif/colors.git#egg=colors
 requests>=2.18.4
 setuptools
