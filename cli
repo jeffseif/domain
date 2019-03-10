@@ -2,4 +2,6 @@
 
 MODULE=$(basename $(pwd)) ;
 
-make && ./venv/bin/python -m "${MODULE}.main" "$@" ;
+make && ./venv/bin/python -m "${MODULE}.main" "$@" \
+    | less --raw-control-chars \
+    ;

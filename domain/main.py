@@ -45,10 +45,8 @@ def iter_print(f, *args, **kwargs):
 
 @apply(sorted)
 def the(tlds, words):
-    words = set(words)
-    for tld in tlds:
-        if tld in words:
-            yield 'the.' + tld
+    for tld in words.intersection(tlds):
+        yield 'the.' + tld
 
 
 @apply(sorted)
@@ -62,7 +60,7 @@ def end(tlds, words):
 
 @apply(sorted)
 def double(tlds, words):
-    words = set(words)
+    words = words
     for tld in tlds:
         for word in words:
             if word.endswith(tld):
@@ -75,34 +73,34 @@ def main():
     tlds = set(TLD.get())
     words = set(English.get())
 
-    # # The
+    # TLD is a word
 
-    # iter_print(
-    #     the,
-    #     conditions(
-    #         tlds,
-    #         longer_than(2),
-    #         shorter_than(10),
-    #     ),
-    #     words,
-    # )
+    iter_print(
+        the,
+        conditions(
+            tlds,
+            longer_than(2),
+            shorter_than(10),
+        ),
+        words,
+    )
 
-    # # Dog
+    # Contains dog
 
-    # iter_print(
-    #     end,
-    #     conditions(
-    #         tlds,
-    #         longer_than(1),
-    #         shorter_than(10),
-    #     ),
-    #     conditions(
-    #         words,
-    #         contains('dog'),
-    #     ),
-    # )
+    iter_print(
+        end,
+        conditions(
+            tlds,
+            longer_than(1),
+            shorter_than(10),
+        ),
+        conditions(
+            words,
+            contains('dog'),
+        ),
+    )
 
-    # Dog
+    # Domain is two words
 
     iter_print(
         double,
